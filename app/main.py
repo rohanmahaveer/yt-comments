@@ -14,7 +14,7 @@ youtube = build("youtube", "v3", developerKey=config["youtube_api_key"])
 publisher = pubsub_v1.PublisherClient()
 
 # Try to get project ID from env; fall back to explicit default for safety
-PROJECT_ID = os.environ.get("GCP_PROJECT", "<<PROJECT_ID>>")
+PROJECT_ID = os.environ.get("GCP_PROJECT", "yt-comments-487009")
 TOPIC_NAME = config["pubsub_topic"]
 topic_path = publisher.topic_path(PROJECT_ID, TOPIC_NAME)
 
