@@ -1,16 +1,21 @@
 variable "project_id" {}
 variable "region" {}
 
-# BigQuery Dataset
-resource "google_bigquery_dataset" "yt_dataset" {
-  dataset_id = "youtube_comments"
-  project    = var.project_id
-  location   = var.region
+variable "dataset_id" {
+  type    = string
+  default = "youtube_comments"
 }
+
+# BigQuery Dataset
+# resource "google_bigquery_dataset" "yt_dataset" {
+#   dataset_id = "youtube_comments"
+#   project    = var.project_id
+#  location   = var.region
+# }
 
 # BigQuery Table
 resource "google_bigquery_table" "yt_comments_table" {
-  dataset_id = google_bigquery_dataset.yt_dataset.dataset_id
+  dataset_id = var.dataset_id
   table_id   = "comments"
   project    = var.project_id
 
@@ -25,7 +30,7 @@ EOF
 
 # BigQuery Table for Sentiment Analysis
 resource "google_bigquery_table" "yt_sentiment_table" {
-  dataset_id = google_bigquery_dataset.yt_dataset.dataset_id
+  dataset_id = var.dataset_id
   table_id   = "sentiment"
   project    = var.project_id
 
